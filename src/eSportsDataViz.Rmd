@@ -28,6 +28,7 @@ BarPlot <- OverwatchData %>%
     geom_col(width = 0.75, color = "black") +
     facet_wrap(. ~ system) + 
     scale_fill_manual(values = c("orange", "red", "green", "blue")) +
+    scale_x_discrete(expand = c(0.01, 0.01)) +
     scale_y_continuous(labels = scales::percent) + 
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 90)) + 
@@ -49,9 +50,10 @@ BarPlot
 DotPlot <- OverwatchData %>% 
     ggplot(mapping = aes(x = win_rate, y = hero, fill = system)) + 
     geom_point(size = 2, shape = 21, color = "black")  +
-    geom_segment(mapping = aes(yend = hero), xend = 0, color = "black") +
-    scale_y_discrete(limits = rev) +
+    geom_segment(mapping = aes(yend = hero), xend = 0, color = "grey") +
+    scale_y_discrete(limits = rev, expand = c(0.01, 0.01)) +
     scale_x_continuous(labels = scales::percent) + 
+    scale_fill_manual(values = c("coral", "navy", "springgreen", "firebrick")) +
     facet_wrap(. ~ system) + 
     theme_minimal() + 
     theme(axis.line.y = element_line(colour = "black", size = 1)) +
@@ -71,7 +73,7 @@ DotPlot
 # Image Export
 
 ```{r}
-ggsave(filename = "../images/barplot.png", plot = BarPlot)
-ggsave(filename = "../images/dotplot.png", plot = DotPlot)
+ggsave(filename = "../images/barplot_modified.png", plot = BarPlot)
+ggsave(filename = "../images/dotplot_modified.png", plot = DotPlot)
 ```
 
